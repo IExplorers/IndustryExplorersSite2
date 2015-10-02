@@ -50,11 +50,11 @@
             $("#UpdatePanel").html(TableContent);
         }).fail(function (response) {
 
-            alert("failure");
-            alert(response.d);
+            alert("Unauthorized to access data");
+            //alert(response.d);
         }).error(function (response) {
-            alert("error");
-            alert(response.partners);
+            alert("Unauthorized to access data");
+            //alert(response.partners);
         });
     }
 
@@ -97,11 +97,11 @@
             $("#UpdatePanel").html(TableContent);
         }).fail(function (response) {
 
-            alert("failure");
-            alert(response.d);
+            alert("Unauthorized to access data");
+            //alert(response.d);
         }).error(function (response) {
-            alert("error");
-            alert(response.partners);
+            alert("Unauthorized to access data");
+            //alert(response.partners);
         });
     }
 }
