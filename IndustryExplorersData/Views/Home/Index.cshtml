@@ -68,7 +68,8 @@
             @*<div class="col-md-12">*@
                 <div id="heading">
                     <h1>Industry Explorers</h1>
-                    <div class="col-md-6"><img style="float:left" src="~/resources/icon.png"></div>
+
+                    <div class="col-md-6"><div class="img-wrapper"><img src="/resources/icon.png"></div></div>
                     <div class="col-md-6">
                         <form data-bind="submit: login" class="form-horizontal" role="form">
 
@@ -92,9 +93,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-4">
+                                <div class="col-sm-offset-2 col-sm-4" align="center">
                                     <button type="submit" class="btn btn-default">Submit</button>
                                     <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button data-bind="click: logout" class="btn btn-default">Log Out</button>
                                 </div>
 
                             </div>
