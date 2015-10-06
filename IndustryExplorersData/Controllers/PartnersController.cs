@@ -10,23 +10,36 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using IndustryExplorersData.Models;
+using System.Web.Http.Cors;
 
 namespace IndustryExplorersData.Controllers
 {
+    [EnableCors(origins: "http://industryexplorer.azurewebsites.net", headers: "*", methods: "*")]
     public class PartnersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
         // GET: api/Partners
-        public IQueryable<Partner> GetPartners()
+        public IQueryable<PartnerDTO> GetPartners()
         {
-            return db.Partners;
+            var partners= from p in db.Partners
+                select new PartnerDTO()
+                {
+                    Id= p.Id,
+                    contact_name = p.contact_name,
+                    organization_name = p.organization_name,
+                    email = p.email,
+                    website = p.website,
+                   date_created = p.date_created
+                };
+
+            return partners;
         }
 
         [Authorize]
         // GET: api/Partners/5
-        [ResponseType(typeof(Partner))]
+        [ResponseType(typeof(PartnerDTO))]
         public async Task<IHttpActionResult> GetPartner(Guid id)
         {
             Partner partner = await db.Partners.FindAsync(id);
@@ -34,10 +47,18 @@ namespace IndustryExplorersData.Controllers
             {
                 return NotFound();
             }
+            var p = new PartnerDTO() {
+                Id = partner.Id,
+                contact_name = partner.contact_name,
+                organization_name = partner.organization_name,
+                email = partner.email,
+                website = partner.website,
+                date_created = partner.date_created
+            };
 
-            return Ok(partner);
+            return Ok(p);
         }
-
+        [Authorize]
         // PUT: api/Partners/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutPartner(Guid id, Partner partner)
@@ -74,7 +95,7 @@ namespace IndustryExplorersData.Controllers
         }
 
         // POST: api/Partners
-        [ResponseType(typeof(Partner))]
+        [ResponseType(typeof(PartnerDTO))]
         public async Task<IHttpActionResult> PostPartner(Partner partner)
         {
             if (!ModelState.IsValid)
@@ -102,8 +123,17 @@ namespace IndustryExplorersData.Controllers
                     throw;
                 }
             }
+            var dto = new PartnerDTO()
+            {
+                Id = partner.Id,
+                contact_name = partner.contact_name,
+                organization_name = partner.organization_name,
+                email = partner.email,
+                website = partner.website,
+                date_created = partner.date_created
+            };
 
-            return CreatedAtRoute("DefaultApi", new { id = partner.Id }, partner);
+            return CreatedAtRoute("DefaultApi", new { id = partner.Id }, dto);
         }
 
         [Authorize]

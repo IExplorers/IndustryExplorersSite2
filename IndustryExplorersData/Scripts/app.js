@@ -73,12 +73,15 @@
             // Cache the access token in session storage.
             sessionStorage.setItem(tokenKey, data.access_token);
             window.location.href = "https://localhost:44300/Home/Data";
-        }).fail(showError);
+        }).fail(function () {
+            alert("Login Unsuccessful");
+        }, showError);
     }
 
     self.logout = function () {
         self.user('');
-        sessionStorage.removeItem(tokenKey)
+        sessionStorage.removeItem(tokenKey);
+        alert("logout successful");
     }
 }
 

@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\IndustryExplorersData-WAWS-dev.json = PublishScripts\Configurations\IndustryExplorersData-WAWS-dev.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B010B40C-E00C-4A80-AD57-8414F88332F4}"
+	ProjectSection(SolutionItems) = preProject
+		IndustryExplorersData\Resources\icon.png = IndustryExplorersData\Resources\icon.png
+		IndustryExplorersData\Resources\microsoft.png = IndustryExplorersData\Resources\microsoft.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

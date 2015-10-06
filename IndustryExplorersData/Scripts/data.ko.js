@@ -53,7 +53,7 @@
             alert("Unauthorized to access data");
             //alert(response.d);
         }).error(function (response) {
-            alert("Unauthorized to access data");
+           // alert("Unauthorized to access data");
             //alert(response.partners);
         });
     }
@@ -100,7 +100,7 @@
             alert("Unauthorized to access data");
             //alert(response.d);
         }).error(function (response) {
-            alert("Unauthorized to access data");
+            //alert("Unauthorized to access data");
             //alert(response.partners);
         });
     }
