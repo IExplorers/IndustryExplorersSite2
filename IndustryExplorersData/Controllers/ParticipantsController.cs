@@ -10,24 +10,36 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using IndustryExplorersData.Models;
+using System.Web.Http.Cors;
 
 namespace IndustryExplorersData.Controllers
 {
-  
+    [EnableCors(origins: "http://industryexplorer.azurewebsites.net", headers: "*", methods: "*")]
     public class ParticipantsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize]
         // GET: api/Participants
-        public IQueryable<Participant> GetParticipants()
+        public IQueryable<ParticipantDTO> GetParticipants()
         {
-            return db.Participants;
+            var participants = from p in db.Participants
+                select new ParticipantDTO()
+                {
+                    participant_id = p.participant_id,
+                    first_name = p.first_name,
+                    last_name = p.last_name,
+                    email = p.email,
+                    organization = p.organization,
+                    date_created = p.date_created
+                };
+
+            return participants;
         }
 
         [Authorize]
         // GET: api/Participants/5
-        [ResponseType(typeof(Participant))]
+        [ResponseType(typeof(ParticipantDTO))]
         public async Task<IHttpActionResult> GetParticipant(Guid id)
         {
             Participant participant = await db.Participants.FindAsync(id);
@@ -36,9 +48,18 @@ namespace IndustryExplorersData.Controllers
                 return NotFound();
             }
 
-            return Ok(participant);
+            var p = new ParticipantDTO()
+            {
+                first_name = participant.first_name,
+                last_name = participant.last_name,
+                email = participant.email,
+                organization = participant.organization,
+                date_created = participant.date_created
+            };
+            return Ok(p);
         }
 
+        [Authorize]
         // PUT: api/Participants/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutParticipant(Guid id, Participant participant)
@@ -75,7 +96,7 @@ namespace IndustryExplorersData.Controllers
         }
 
         // POST: api/Participants
-        [ResponseType(typeof(Participant))]
+        [ResponseType(typeof(ParticipantDTO))]
         public async Task<IHttpActionResult> PostParticipant(Participant participant)
         {
             if (!ModelState.IsValid)
@@ -105,8 +126,17 @@ namespace IndustryExplorersData.Controllers
                     throw;
                 }
             }
+            var dto = new ParticipantDTO()
+            {
+                participant_id = participant.participant_id,
+                first_name = participant.first_name,
+                last_name = participant.last_name,
+                email = participant.email,
+                organization = participant.organization,
+                date_created = participant.date_created
+            };
 
-            return CreatedAtRoute("DefaultApi", new { id = participant.participant_id }, participant);
+            return CreatedAtRoute("DefaultApi", new { id = participant.participant_id }, dto);
         }
 
         [Authorize]

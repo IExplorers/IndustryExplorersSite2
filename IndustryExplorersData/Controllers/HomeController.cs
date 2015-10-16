@@ -16,13 +16,14 @@ namespace IndustryExplorersData.Controllers
             return View();
         }
 
-       // [Authorize]
+        [Authorize]
         public ActionResult Data()
         {
             ViewBag.Title = "Home Page";
 
             return View();
         }
+        [Authorize]
         public ActionResult Index2()
         {
             ViewBag.Title = "Home Page";
