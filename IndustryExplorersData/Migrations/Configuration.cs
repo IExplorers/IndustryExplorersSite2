@@ -9,7 +9,7 @@ namespace IndustryExplorersData.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(IndustryExplorersData.Models.ApplicationDbContext context)

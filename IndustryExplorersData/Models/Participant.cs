@@ -8,17 +8,67 @@ namespace IndustryExplorersData.Models
     public class Participant
     {
         [Key]
-        public Guid participant_id { get; set; }       
-        public Guid validation_id { get; set; }       
-        public bool activated { get; set; }
-        public DateTime date_created { get; set; }
+        public Guid ParticipantID { get; set; }     
+          
+        public Guid ValidationID { get; set; }   
+            
+        public bool Activated { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
         [Required]
-        public string first_name { get; set; }        
+        [MaxLength(50)]
+        public string FirstName { get; set; }    
+            
         [Required]
-        public string last_name { get; set; }
+        [MaxLength(50)]
+        public string LastName { get; set; }
+
         [Required]
-        public string email { get; set; }
-        public string organization { get; set; }
+        [MaxLength(50)]
+        public string Email { get; set; }
+
+        [MaxLength(120)]
+        public string Organization { get; set; }
+
+        [Required]
+        [MaxLength(25)]
+        public string Phone { get; set; }
+
+        [Required]
+        public bool AuthorizedToWork { get; set; }
+
+        [Required]
+        [MaxLength(120)]
+        public string StreetAddress { get; set; }
+
+        [Required]
+        [MaxLength(30)]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(2), MinLength(2)]
+        public string State { get; set; }
+
+        [Required]
+        [MaxLength(15)]
+        public string Postalcode { get; set; }
+
+        [Required]       
+        public string Question1 { get; set; }
+
+        [Required]
+        public string Question2 { get; set; }
+
+        [Required]
+        public string Question3 { get; set; }
+
+        [Required]
+        public byte[] Resume { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string ResumeName { get; set; }
 
     }
 }
