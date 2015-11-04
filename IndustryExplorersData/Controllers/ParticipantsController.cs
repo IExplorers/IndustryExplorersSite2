@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using IndustryExplorersData.Models;
 using IndustryExplorersData.Extensions;
+using System.Net.Mail;
 
 namespace IndustryExplorersData.Controllers
 {
@@ -151,7 +152,7 @@ namespace IndustryExplorersData.Controllers
             if (data.Files.ContainsKey("Resume"))
             {
                 participant.Resume = data.Files["Resume"].File;
-                participant.ResumeName = data.Files["Resume"].Name;
+                participant.ResumeName = data.Files["Resume"].Filename;
             }
 
             try
@@ -159,7 +160,7 @@ namespace IndustryExplorersData.Controllers
                 db.Participants.Add(participant);
             }
             catch (Exception)
-            {
+            {                 
                 throw new HttpResponseException(HttpStatusCode.NotModified);
             }
 
@@ -182,14 +183,76 @@ namespace IndustryExplorersData.Controllers
                 }
             }
             catch(Exception)
-            {
+            {                
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            return new HttpResponseMessage(HttpStatusCode.OK)
+            //TODO: Send confirmation email with proper credentials
+            //SendConfirmationEMail(participant.Email);
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent("Thank you for applying. You have successfully submitted your application to Industry Explorers program.")
             };
+                       
+
+            return response;
+        }
+
+        private void SendConfirmationEMail(string toEmailAddress)
+        {
+
+            string smtpAddress = "smtp.gmail.com";
+            int portNumber = 587;
+            bool enableSSL = true;
+
+            string emailFrom = "explorers@microsoft.com";          
+            string password = "abcdefg";
+            string emailTo = toEmailAddress;
+            string subject = "Industry Explorers Program";
+            string body = "Please do not respond to this email. This is an automated response to thank you "
+                + "for applying to the Industry Explorers’ Program.  We will review your application and "
+                + "contact you regarding the status of your submission.<br/>"
+                + "The Industry Explorers Team";          
+
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(emailFrom);
+                mail.To.Add(emailTo);
+                mail.Bcc.Add(emailFrom);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                            
+
+                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                {                    
+                    smtp.Credentials = new NetworkCredential(emailFrom, password);
+                    smtp.EnableSsl = enableSSL;
+                   
+                    try
+                    {
+                        smtp.Send(mail);
+                    }
+                    catch (SmtpFailedRecipientsException ex)
+                    {
+                        for (int i = 0; i < ex.InnerExceptions.Length; i++)
+                        {
+                            SmtpStatusCode status = ex.InnerExceptions[i].StatusCode;
+                            if (status == SmtpStatusCode.MailboxBusy ||
+                                status == SmtpStatusCode.MailboxUnavailable)
+                            {
+                                System.Threading.Thread.Sleep(5000);
+                                smtp.Send(mail);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }          
         }
 
         [Authorize]
