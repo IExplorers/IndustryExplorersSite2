@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using IndustryExplorersData.Models;
 using IndustryExplorersData.Extensions;
 using System.Net.Mail;
+using System.Web.Http.Cors;
 
 namespace IndustryExplorersData.Controllers
 {
@@ -76,7 +77,7 @@ namespace IndustryExplorersData.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Participants        
+        // POST: api/Participants/apply             
         [HttpPost]
         public async Task<HttpResponseMessage> Apply(HttpRequestMessage request)
         {
@@ -194,8 +195,8 @@ namespace IndustryExplorersData.Controllers
             {
                 Content = new StringContent("Thank you for applying. You have successfully submitted your application to Industry Explorers program.")
             };
-                       
 
+            response.Headers.Add("Access-Control-Allow-Origin", "http://industryexplorer.azurewebsites.net");
             return response;
         }
 

@@ -71,8 +71,8 @@
         }).done(function (data) {
             self.user(data.userName);
             // Cache the access token in session storage.
-            sessionStorage.setItem(tokenKey, data.access_token);
-            window.location.href = "https://localhost:44300/Home/Data";
+            sessionStorage.setItem(tokenKey, data.access_token);            
+            window.location.href = window.location.href + "/Home/Data";            
         }).fail(showError);
     }
 
