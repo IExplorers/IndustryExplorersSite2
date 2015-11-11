@@ -73,47 +73,13 @@ namespace IndustryExplorersData.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //// POST: api/Partners
-        //[ResponseType(typeof(Partner))]
-        //public async Task<IHttpActionResult> PostPartner(Partner partner)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    partner.Id = Guid.NewGuid();
-        //    partner.validation_id = Guid.NewGuid();
-        //    partner.activated = false;
-        //    partner.date_created = DateTime.Today;
-        //    db.Partners.Add(partner);
-
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (PartnerExists(partner.Id))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = partner.Id }, partner);
-        //}
-
         // POST: api/Partners
         [ResponseType(typeof(Partner))]
-        public async Task<HttpResponseMessage> PostPartner(Partner partner)
+        public async Task<IHttpActionResult> PostPartner(Partner partner)
         {
             if (!ModelState.IsValid)
             {
-                throw new Exception();
-               // return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
             partner.Id = Guid.NewGuid();
             partner.validation_id = Guid.NewGuid();
@@ -129,8 +95,7 @@ namespace IndustryExplorersData.Controllers
             {
                 if (PartnerExists(partner.Id))
                 {
-                    throw new Exception();
-                    //return Conflict();
+                    return Conflict();
                 }
                 else
                 {
@@ -138,15 +103,8 @@ namespace IndustryExplorersData.Controllers
                 }
             }
 
-            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent("You have successfully submitted your information to Industry Explorers program.")
-            };
-
-            response.Headers.Add("Access-Control-Allow-Origin", "http://industryexplorer.azurewebsites.net");
-
-            return response;
-        }
+            return CreatedAtRoute("DefaultApi", new { id = partner.Id }, partner);
+        }   
 
         [Authorize]
         // DELETE: api/Partners/5

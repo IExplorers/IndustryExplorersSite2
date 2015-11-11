@@ -195,8 +195,7 @@ namespace IndustryExplorersData.Controllers
             {
                 Content = new StringContent("Thank you for applying. You have successfully submitted your application to Industry Explorers program.")
             };
-
-            response.Headers.Add("Access-Control-Allow-Origin", "http://industryexplorer.azurewebsites.net");
+           
             return response;
         }
 

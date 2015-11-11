@@ -33,16 +33,16 @@
                     "<th>" + "First Name" + "</th>" +
                         "<th>" + "Last Name" + "</th>" +
                         "<th>" + "Email Address" + "</th>" +
-                        "<th>" + "Organization" + "</th>" +
+                        "<th>" + "Phone" + "</th>" +
                         "<th>" + "DateCreatedOn" + "</th>" +
                     "</tr>";
             $.each(data, function (index, element) {
 
-                TableContent += "<tr border='2'>" + "<td>" + element.first_name + "</td>" +
-                                 "<td>" + element.last_name + "</td>" +
-                                 "<td>" + element.email + "</td>" +
-                                 "<td>" + element.organization + "</td>" +
-                                 "<td>" + element.date_created + "</td></tr>"
+                TableContent += "<tr border='2'>" + "<td>" + element.FirstName + "</td>" +
+                                 "<td>" + element.LastName + "</td>" +
+                                 "<td>" + element.Email + "</td>" +
+                                 "<td>" + element.Phone + "</td>" +
+                                 "<td>" + element.DateCreated + "</td></tr>"
                 ;
 
             });
