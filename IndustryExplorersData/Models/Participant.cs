@@ -58,17 +58,10 @@ namespace IndustryExplorersData.Models
         public string Question1 { get; set; }
 
         [Required]
-        public string Question2 { get; set; }
+        public string Question2 { get; set; }        
 
         [Required]
-        public string Question3 { get; set; }
-
-        [Required]
-        public byte[] Resume { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string ResumeName { get; set; }
+        public string ResumeUrl { get; set; }        
 
     }
 }

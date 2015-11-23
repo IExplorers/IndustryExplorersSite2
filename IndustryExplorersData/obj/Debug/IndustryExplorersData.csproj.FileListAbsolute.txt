@@ -159,6 +159,7 @@ C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\bin\Microsoft.O
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\bin\System.Web.Http.Owin.xml
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.Migrations.Initial.resources
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.Migrations._201511010625553_Initial.resources
+C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.Migrations.ParticipantChanges.resources
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.csproj.GenerateResource.Cache
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.dll
 C:\IndustryExplorer\IndustryExplorersSite2\IndustryExplorersData\obj\Debug\IndustryExplorersData.pdb
